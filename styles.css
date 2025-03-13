@@ -1,1 +1,67 @@
+/* Estilos generales */
+body {
+    font-family: 'Arapey', serif;
+    text-align: center;
+    background-color: #0d1828;
+    color: #bdbdbd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 450px;
+    padding: 30px;
+    background: rgba(13, 24, 40, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Títulos y textos */
+h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Cuenta regresiva en una sola línea sin fondo */
+.countdown {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #bdbdbd;
+}
+
+/* Estilo para el enlace bloqueado */
+.blocked-link {
+    display: inline-block;
+    background-color: #555;
+    padding: 10px 15px;
+    margin-top: 20px;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: not-allowed;
+}
+
+/* Estilo cuando el enlace está desbloqueado */
+.unlocked-link {
+    background-color: #0d1828; /* Color brillante */
+    color: #bdbdbd; /* Texto blanco */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Efecto de hover para el enlace desbloqueado */
+.unlocked-link:hover {
+    background-color: #3c3c3c; /* Un tono más oscuro al pasar el cursor */
+}
 
