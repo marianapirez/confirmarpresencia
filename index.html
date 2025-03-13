@@ -1,52 +1,139 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmar Presencia</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date - XV de Luciana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arapey', serif;
+            text-align: center;
+            background-color: #0d1828;
+            color: #bdbdbd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 450px;
+            padding: 30px;
+            background: rgba(13, 24, 40, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Títulos y textos */
+        h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        /* Cuenta regresiva en una sola línea sin fondo */
+        .countdown {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #bdbdbd;
+        }
+
+        /* Estilo para el enlace bloqueado */
+        .blocked-link {
+            display: inline-block;
+            background-color: #555;
+            padding: 10px 15px;
+            margin-top: 20px;
+            color: #ccc;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+        }
+
+        /* Estilo cuando el enlace está desbloqueado */
+        .unlocked-link {
+            background-color: #0d1828; /* Color brillante */
+            color: #bdbdbd; /* Texto blanco */
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Efecto de hover para el enlace desbloqueado */
+        .unlocked-link:hover {
+            background-color: #3c3c3c; /* Un tono más oscuro al pasar el cursor */
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Página 1: Ingreso del nombre -->
-    <section id="pagina1">
-      <h1>Confirme su presencia a los quince años de Luciana</h1>
-      <p>Ingrese su número de celular o su nombre y apellido</p>
-      <p>(todo junto y en minúsculas)</p>
-      <input type="text" id="nombre" placeholder="Ej: lucianaramos">
-      <button id="continuarBtn">Continuar</button>
-    </section>
+    <div class="container">
+        <h1>¡Un evento mágico está por llegar!</h1>
+        <p>Muy pronto recibirás todos los detalles… pero por ahora, guarda la fecha...</p>
+        <p><strong>19 de abril de 2025 | 20:30 hs</strong></p>
+        <div id="countdown" class="countdown"></div>
 
-    <!-- Página 2: Confirmación de asistencia -->
-    <section id="pagina2" style="display: none;">
-      <h1>Confirme su presencia a los quince años de Luciana</h1>
-      <p id="bienvenida">Hola, <span id="nombreInvitado">...</span></p>
-      <p>¿Confirma su presencia?</p>
-      <div class="radio-container">
-        <input type="radio" id="si" name="asistencia" value="si">
-        <label for="si" class="radio-label">Sí</label>
-        <input type="radio" id="no" name="asistencia" value="no">
-        <label for="no" class="radio-label">No</label>
-      </div>
-    
-      <!-- Contenedor extra, oculto inicialmente -->
-      <div id="extras" style="display: none;">
-        <h1 id="cupos">Tienes disponibles X lugares.</h1>
-        <p>¿Cuántos lugares confirma?</p>
-        <input type="number" id="lugaresConfirmados" min="1" placeholder="-">
-      </div>
-      <button id="confirmarBtn">Enviar</button>
-    </section>
+        <!-- Enlace de invitación bloqueado -->
+        <a id="invitation-link" href="#" class="blocked-link">Ver más</a>
+    </div>
 
-    <!-- Página 4: Agradecimiento -->
-    <section id="pagina4" style="display: none;">
-      <h1 id="mensajeGracias">Gracias por confirmar tu asistencia.</h1>
-      <p id="detalleGracias">¡Nos vemos en mis quince años!</p>
-      <!-- Enlace a WhatsApp (se mostrará solo para quienes no asistan) -->
-      <div id="whatsappLink"></div>
-    </section>
-  </div>
+    <script>
+        // Establecer la fecha del evento y desbloqueo
+        const eventDate = new Date("April 19, 2025 20:30:00").getTime();
+        const unlockDate = new Date("March 30, 2025 00:00:00").getTime(); // Fecha de desbloqueo del enlace
 
-  <script src="script.js"></script>
+        // Obtener el enlace de la invitación
+        const invitationLink = document.getElementById("invitation-link");
+
+        // Actualizar la cuenta regresiva cada segundo
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            // Calcular días, horas, minutos y segundos
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Mostrar la cuenta regresiva en una sola línea
+            document.getElementById("countdown").textContent = 
+                "Faltan " + days + " días " + hours + "h " + minutes + "m " + seconds + "s";
+
+            // Cuando llegue el día de la fiesta
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").textContent = "¡Es el gran día!";
+            }
+
+            // Verificar si ya es la fecha para desbloquear el enlace
+            if (now >= unlockDate) {
+                invitationLink.href = "https://invitacionalosxvdeluciana.my.canva.site/dagd9rowhoq"; // Reemplaza con el enlace real
+                invitationLink.classList.remove("blocked-link");
+                invitationLink.classList.add("unlocked-link");
+                invitationLink.textContent = "La invitación está aquí, ¡el gran día está más cerca!";
+            }
+        }, 1000);
+
+        // Agregar un evento de clic para mostrar la alerta si intentan acceder antes de la fecha
+        invitationLink.addEventListener('click', function(event) {
+            const now = new Date().getTime();
+
+            if (now < unlockDate) {
+                event.preventDefault(); // Evitar que se abra el enlace
+                const daysRemaining = Math.ceil((unlockDate - now) / (1000 * 60 * 60 * 24)); // Calcular días restantes
+                alert(`El enlace se habilitará pronto, estamos contando los días.`);
+            }
+        });
+    </script>
 </body>
 </html>
